@@ -110,6 +110,7 @@ The example below uses [torchao](../quantization/torchao) to only quantize the w
 import requests
 import torch
 from PIL import Image
+from torchao.quantization import Int4WeightOnlyConfig
 
 from transformers import AutoProcessor, RTDetrForObjectDetection, TorchAoConfig, VitPoseForPoseEstimation
 
@@ -136,7 +137,7 @@ person_boxes = person_boxes.cpu().numpy()
 person_boxes[:, 2] = person_boxes[:, 2] - person_boxes[:, 0]
 person_boxes[:, 3] = person_boxes[:, 3] - person_boxes[:, 1]
 
-quantization_config = TorchAoConfig("int4_weight_only", group_size=128)
+quantization_config = TorchAoConfig(Int4WeightOnlyConfig(group_size=128))
 
 image_processor = AutoProcessor.from_pretrained("usyd-community/vitpose-plus-huge")
 model = VitPoseForPoseEstimation.from_pretrained("usyd-community/vitpose-plus-huge", device_map="auto", quantization_config=quantization_config)

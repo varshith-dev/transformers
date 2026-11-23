@@ -118,10 +118,12 @@ Quantization reduces the memory burden of large models by representing the weigh
 The example below uses [torchao](../quantization/torchao) to only quantize the weights to int4.
 
 ```python
+from torchao.quantization import Int4WeightOnlyConfig
+
 from transformers import Qwen2_5_VLForConditionalGeneration, TorchAoConfig
 
 
-quantization_config = TorchAoConfig("int4_weight_only", group_size=128)
+quantization_config = TorchAoConfig(Int4WeightOnlyConfig(group_size=128))
 model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
     "Qwen/Qwen2.5-VL-7B-Instruct",
     device_map="auto",

@@ -82,13 +82,12 @@ The example below uses [torchao](../quantization/torchao) to only quantize the w
 
 ```python
 #pip install torchao
+from torchao.quantization import Int4WeightOnlyConfig
+
 from transformers import AutoModelForCausalLM, AutoTokenizer, TorchAoConfig
 
 
-torchao_config = TorchAoConfig(
-    "int4_weight_only",
-    group_size=128
-)
+torchao_config = TorchAoConfig(Int4WeightOnlyConfig(group_size=128))
 
 tokenizer = AutoTokenizer.from_pretrained(
     "allenai/FlexOlmo-7x7B-1T"

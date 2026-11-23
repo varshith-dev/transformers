@@ -58,10 +58,12 @@ The example below uses [torchao](../quantization/torchao) to only quantize the w
 
 ```python
 # pip install torchao
+from torchao.quantization import Int4WeightOnlyConfig
+
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, TorchAoConfig
 
 
-quantization_config = TorchAoConfig("int4_weight_only", group_size=128)
+quantization_config = TorchAoConfig(Int4WeightOnlyConfig(group_size=128))
 
 model = AutoModelForSeq2SeqLM.from_pretrained(
     "google/byt5-xl",

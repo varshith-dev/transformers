@@ -64,13 +64,14 @@ The example below uses [torchao](../quantization/torchao) to only quantize the w
 # !pip install torchao
 import requests
 from PIL import Image
+from torchao.quantization import Int4WeightOnlyConfig
 
 from transformers import AltCLIPModel, AltCLIPProcessor, TorchAoConfig
 
 
 model = AltCLIPModel.from_pretrained(
     "BAAI/AltCLIP",
-    quantization_config=TorchAoConfig("int4_weight_only", group_size=128),
+    quantization_config=TorchAoConfig(Int4WeightOnlyConfig(group_size=128)),
     device_map="auto",
 )
 

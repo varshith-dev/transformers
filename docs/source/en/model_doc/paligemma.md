@@ -91,11 +91,12 @@ The example below uses [torchao](../quantization/torchao) to only quantize the w
 # pip install torchao
 import requests
 from PIL import Image
+from torchao.quantization import Int4WeightOnlyConfig
 
 from transformers import AutoProcessor, PaliGemmaForConditionalGeneration, TorchAoConfig
 
 
-quantization_config = TorchAoConfig("int4_weight_only", group_size=128)
+quantization_config = TorchAoConfig(Int4WeightOnlyConfig(group_size=128))
 model = PaliGemmaForConditionalGeneration.from_pretrained(
     "google/paligemma2-28b-mix-224",
     device_map="auto",

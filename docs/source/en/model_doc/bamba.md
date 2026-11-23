@@ -74,10 +74,12 @@ Quantization reduces the memory burden of large models by representing the weigh
 The example below uses [torchao](../quantization/torchao) to only quantize the weights to int4.
 
 ```python
+from torchao.quantization import Int4WeightOnlyConfig
+
 from transformers import AutoModelForCausalLM, AutoTokenizer, TorchAoConfig
 
 
-quantization_config = TorchAoConfig("int4_weight_only", group_size=128)
+quantization_config = TorchAoConfig(Int4WeightOnlyConfig(group_size=128))
 tokenizer = AutoTokenizer.from_pretrained("ibm-ai-platform/Bamba-9B-v2")
 model = AutoModelForCausalLM.from_pretrained(
    "ibm-ai-platform/Bamba-9B-v2",

@@ -86,10 +86,12 @@ The example below uses [torchao](../quantization/torchao) to only quantize the w
 
 ```python
 # pip install torchao
+from torchao.quantization import Int4WeightOnlyConfig
+
 from transformers import AutoModelForCausalLM, AutoTokenizer, TorchAoConfig
 
 
-quantization_config = TorchAoConfig("int4_weight_only", group_size=128)
+quantization_config = TorchAoConfig(Int4WeightOnlyConfig(group_size=128))
 model = AutoModelForCausalLM.from_pretrained(
     "meta-llama/Llama-2-13b-hf",
     device_map="auto",

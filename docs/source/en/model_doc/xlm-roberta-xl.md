@@ -86,11 +86,12 @@ The example below uses [torchao](../quantization/torchao) to only quantize the w
 
 ```python
 import torch
+from torchao.quantization import Int4WeightOnlyConfig
 
 from transformers import AutoModelForMaskedLM, AutoTokenizer, TorchAoConfig
 
 
-quantization_config = TorchAoConfig("int4_weight_only", group_size=128)
+quantization_config = TorchAoConfig(Int4WeightOnlyConfig(group_size=128))
 tokenizer = AutoTokenizer.from_pretrained(
     "facebook/xlm-roberta-xl",
 )

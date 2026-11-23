@@ -85,11 +85,12 @@ The example below uses [torchao](../quantization/torchao) to only quantize the w
 ```python
 # pip install datasets torchao
 from datasets import load_dataset
+from torchao.quantization import Int4WeightOnlyConfig
 
 from transformers import AutoModelForImageTextToText, AutoProcessor, TorchAoConfig
 
 
-quantization_config = TorchAoConfig("int4_weight_only", group_size=128)
+quantization_config = TorchAoConfig(Int4WeightOnlyConfig(group_size=128))
 processor = AutoProcessor.from_pretrained("naver-clova-ix/donut-base-finetuned-docvqa")
 model = AutoModelForImageTextToText.from_pretrained("naver-clova-ix/donut-base-finetuned-docvqa", quantization_config=quantization_config, device_map="auto")
 
